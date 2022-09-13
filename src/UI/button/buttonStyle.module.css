@@ -1,0 +1,38 @@
+.buttonCansel, .buttonSave {
+    width: 120px;
+    height: auto;
+    margin: 10px 20px;
+    font-size: 20px;
+    border: solid black 1px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.buttonCansel {
+    background-color: #f133099f;
+}
+
+.buttonSave {
+    background-color: #0dbc1e9f;
+}
+
+.buttonCansel:hover {
+    box-shadow: 0px 0px 5px 5px #f133099f;
+    /* padding: 0 0 10px 0;
+    margin: 0 20px */
+}
+
+.buttonCansel:active {
+    box-shadow: 0px 0px 3px 3px #f133099f;
+}
+
+.buttonSave:hover {
+    box-shadow: 0px 0px 5px 5px #0dbc1e9f;
+    /* padding: 0 0 10px 0;
+    margin: 0 20px */
+}
+
+.buttonSave:active {
+    box-shadow: 0px 0px 3px 3px #0dbc1e9f;
+}
