@@ -3,8 +3,7 @@ import style from './buttonStyle.module.css'
 
 export default class Button extends Component {
     constructor(props){
-        super()
-        this.props = props
+        super(props)
     }
   render() {
 
