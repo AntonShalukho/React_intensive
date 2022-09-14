@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './buttonStyle.module.css'
+import style from './buttonStyle.module.css'
 
 export default class Button extends Component {
     constructor(props){
@@ -7,16 +7,13 @@ export default class Button extends Component {
         this.props = props
     }
   render() {
+
     return (
         <button 
-            className={
-                this.props.text === 'Отмена' 
-                ? styles.buttonCansel
-                : styles.buttonSave
-            } 
+            className={`${style.button} ${style[this.props.backgroundColor]}`} 
             onClick={(e) => this.props.method(e)} 
         >
-            {this.props.text}    
+            {this.props.children}    
         </button>
     )
   }
