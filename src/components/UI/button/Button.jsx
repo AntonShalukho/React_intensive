@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import style from './buttonStyle.module.css'
 
 export default class Button extends Component {
-    constructor(props){
-        super(props)
-    }
   render() {
 
     return (
