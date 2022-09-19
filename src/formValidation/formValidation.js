@@ -27,11 +27,10 @@ export class FormValidation {
         return reg.test(string.split().slice(0, 9).join(''))
     }
     static isValidPhonNumber(string) {
-        console.log('0', +string.substring(0, 1) || string === '0')
         if(+string.substring(0, 1) || string.substring(0, 1) === '0') {
-            if(+string.substring(2, 6)) {
-                if(+string.substring(7, 9)) {
-                    if(+string.substring(10)) {
+            if(+string.substring(2, 6) || string.substring(2, 6) === '0000') {
+                if(+string.substring(7, 9) || string.substring(7, 9) === '00') {
+                    if(+string.substring(10) || string.substring(10) === '00') {
                         return false
                     }
                 }

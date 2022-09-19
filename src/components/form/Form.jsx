@@ -6,7 +6,6 @@ import style from './FormStyle.module.css'
 import Textarea from '../UI/textarea/Textarea';
 import ErrorLine from '../errorLine/ErrorLine';
 import { FormValidation } from '../../formValidation/FormValidation';
-// import App from '../../App';
 import DoneForm from '../doneForm/DoneForm';
 
 class Form extends React.Component {

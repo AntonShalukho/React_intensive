@@ -46,12 +46,3 @@ export default class DoneForm extends React.Component {
         )
     }
 }
-
-// name: '',
-// surname: '',
-// bornDate: '',
-// phoneNumber: '',
-// site: '',
-// about: '',
-// technologicalStack: '',
-// projectDescription: '',
