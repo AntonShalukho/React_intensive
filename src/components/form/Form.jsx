@@ -10,6 +10,7 @@ import { FormValidation } from '../../formValidation/FormValidation';
 import DoneForm from '../doneForm/DoneForm';
 
 class Form extends React.Component {
+    validCaunter = [];
     state = {
       name: '',
       surname: '',
@@ -27,12 +28,13 @@ class Form extends React.Component {
       aboutError: '',
       technologicalStackError: '',
       projectDescriptionError: '',
-      context: true
+      context: true,
     }
   
   // SAVE AND CANSEL LOGIC
   cansel = (e) => {
     e.preventDefault()
+    this.validCaunter = [];
     this.cleaner()
   }
   cleaner = () => {
@@ -54,26 +56,22 @@ class Form extends React.Component {
       technologicalStackError: '',
       projectDescriptionError: '',
     })
+
   }
 
   save = (e) => {
-    e.preventDefault()
-    if(this.isValidName()) {
-      if(this.isValidSurname()) {
-        if(this.isValidDate()) {
-          if(this.isValidPhone()) {
-            if(this.isValidSite()) {
-              if(this.isValidAbout()) {
-                if(this.isValidTechnologicalStack()) {
-                  if(this.isValidProjectDescription()) {
-                    this.backToForm()
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    e.preventDefault();
+    this.validCaunter = [];
+    this.isValidName();
+    this.isValidSurname();
+    this.isValidDate();
+    this.isValidPhone();
+    this.isValidSite();
+    this.isValidAbout();
+    this.isValidTechnologicalStack();
+    this.isValidProjectDescription();
+    if(!this.validCaunter.includes('0')) {
+      this.backToForm()
     }
   }
   backToForm = () => {
@@ -82,90 +80,95 @@ class Form extends React.Component {
   //-----------------------------------------------
 
   // VALIDATION METHODS 
-  isValidName = () => {
+  isValidName = async () => {
     this.setState({nameError: ''})
+    await this.setState({name:  FormValidation.getNameSurnameWithoutSpace(this.state.name)});
     if(FormValidation.isEpmty(this.state.name)) {
       this.setState({nameError:  FormValidation.messages.empty});
-      return false
+      this.validCaunter.push('0')
     } else if(FormValidation.isUpperCaseNameAndSurname(this.state.name)) {
-      this.setState({nameError: FormValidation.messages.UpperCase});
-      return false
+      this.setState({nameError: FormValidation.messages.UpperName});
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
-  isValidSurname = () => {
+  isValidSurname = async () => {
     this.setState({surnameError: ''})
+    await this.setState({surname:  FormValidation.getNameSurnameWithoutSpace(this.state.surname)});
     if(FormValidation.isEpmty(this.state.surname)) {
       this.setState({surnameError: FormValidation.messages.empty});
-      return false
+      this.validCaunter.push('0')
     } else if(FormValidation.isUpperCaseNameAndSurname(this.state.surname)) {
-      this.setState({surnameError: FormValidation.messages.UpperCase});
-      return false
+      this.setState({surnameError: FormValidation.messages.UpperSurame});
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
   isValidDate = () => {
     this.setState({bornDateError: ''});
     if(FormValidation.isEpmty(this.state.bornDate)) {
       this.setState({bornDateError: FormValidation.messages.empty});
-      return false
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
   isValidPhone = () => {
     this.setState({phoneNumberError: ''});
     if(FormValidation.isEpmty(this.state.phoneNumber)){
       this.setState({phoneNumberError: FormValidation.messages.empty});
-      return false
+      this.validCaunter.push('0')
     } else if (this.state.phoneNumber.length < 12) {
+      this.setState({phoneNumberError: FormValidation.messages.wrongTypePhone});
+      this.validCaunter.push('0')
+    } else if (FormValidation.isValidPhonNumber(this.state.phoneNumber)) {
       this.setState({phoneNumberError: FormValidation.messages.wrongNumber});
-      return false
-    }
-    return true
+      this.validCaunter.push('0')
+    } 
+    this.validCaunter.push('1')
   }
   isValidSite = () => {
     this.setState({siteError: ''});
     if(FormValidation.isEpmty(this.state.site)){
       this.setState({siteError: FormValidation.messages.empty})
-      return false
+      this.validCaunter.push('0')
     } else if(!FormValidation.isSite(this.state.site)) {
       this.setState({siteError: FormValidation.messages.url})
-      return false
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
   isValidAbout = () => {
     this.setState({aboutError: ''});
     if(FormValidation.isEpmty(this.state.about)){
       this.setState({aboutError: FormValidation.messages.empty})
-      return false
+      this.validCaunter.push('0')
     }
     if(this.state.about.length > 600) {
-      return false
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
   isValidTechnologicalStack = () => {
     this.setState({technologicalStackError: ''});
     if(FormValidation.isEpmty(this.state.technologicalStack)){
       this.setState({technologicalStackError: FormValidation.messages.empty})
-      return false
+      this.validCaunter.push('0')
     }
     if(this.state.technologicalStack.length > 600) {
-      return false
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
   isValidProjectDescription = () => {
     this.setState({projectDescriptionError: ''});
     if(FormValidation.isEpmty(this.state.projectDescription)){
       this.setState({projectDescriptionError: FormValidation.messages.empty})
-      return false
+      this.validCaunter.push('0')
     }
     if(this.state.projectDescription.length > 600) {
-      return false
+      this.validCaunter.push('0')
     }
-    return true
+    this.validCaunter.push('1')
   }
   //-----------------------------------------------------------
 
@@ -174,7 +177,7 @@ class Form extends React.Component {
       return (<span style={{color: 'blue'}}>{`${string.length} / 600`}</span>)
   }
   message = (state, string) => {
-    if(state.length < 600) {
+    if(state.length < 601) {
       return this.caunter(state)
     } else {
       if(string === 'about') {return <span style={{color: 'red'}}>{`${state.length} / 600 - ${FormValidation.messages.limit}`}</span>}
@@ -221,7 +224,7 @@ class Form extends React.Component {
               <h1 className={style.title} >Создание анкеты</h1>
               <div className={style.secondPartOfForm}>
                 <div>
-                  <Label for='name'>Имя</Label>
+                  <Label for='name'>Имя<span className={style.star}>*</span></Label>
                   <Input 
                     type='text' 
                     name='name'
@@ -232,7 +235,7 @@ class Form extends React.Component {
                   <ErrorLine>{this.state.nameError}</ErrorLine>
                 </div>
                 <div>
-                  <Label for='surname' >Фамилия</Label>
+                  <Label for='surname' >Фамилия<span className={style.star}>*</span></Label>
                   <Input 
                     type='text' 
                     name='surname' 
@@ -243,7 +246,7 @@ class Form extends React.Component {
                   <ErrorLine>{this.state.surnameError}</ErrorLine>
                 </div>
                 <div>
-                  <Label for='bornDate'>Дата рождения</Label>
+                  <Label for='bornDate'>Дата рождения<span className={style.star}>*</span></Label>
                   <Input 
                     type='date'
                     name='bornDate'
@@ -254,7 +257,7 @@ class Form extends React.Component {
                   <ErrorLine>{this.state.bornDateError}</ErrorLine>
                 </div>
                 <div>
-                  <Label for='phoneNumber' >Телефон</Label>
+                  <Label for='phoneNumber' >Телефон<span className={style.star}>*</span></Label>
                   <Input 
                     type='tel' 
                     name='phoneNumber' 
@@ -269,18 +272,18 @@ class Form extends React.Component {
               <hr/>
               <div className={style.secondPartOfForm}>
                 <div>
-                  <Label for='site' >Сайт</Label>
+                  <Label for='site' >Сайт<span className={style.star}>*</span></Label>
                   <Input 
                     type='text' 
                     name='site' 
-                    placeholder='Your site'
+                    placeholder='https://'
                     value={this.state.site}
                     onChange={(e) => this.setState({site: e.target.value})}  
                   />
                   <ErrorLine>{this.state.siteError}</ErrorLine>
                 </div>
                 <div>
-                  <Label>О себе</Label>
+                  <Label>О себе<span className={style.star}>*</span></Label>
                   <Textarea 
                     placeholder='About you'
                     value={this.state.about}
@@ -294,7 +297,7 @@ class Form extends React.Component {
                   </ErrorLine>
                 </div>
                 <div>
-                  <Label>Стек технологий</Label>
+                  <Label>Стек технологий<span className={style.star}>*</span></Label>
                   <Textarea 
                     placeholder='Technological stack'
                     value={this.state.technologicalStack}
@@ -308,7 +311,7 @@ class Form extends React.Component {
                   </ErrorLine>
                 </div>    
                 <div>
-                  <Label>Описание последнего проекта</Label>
+                  <Label>Описание последнего проекта<span className={style.star}>*</span></Label>
                   <Textarea 
                     placeholder='Clarifiting last project'
                     value={this.state.projectDescription}

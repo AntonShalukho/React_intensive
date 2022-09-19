@@ -23,3 +23,7 @@
     align-items: flex-start;
     row-gap: 10px;
 }
+
+.star {
+    color: red
+}
