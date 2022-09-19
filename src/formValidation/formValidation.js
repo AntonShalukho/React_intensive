@@ -3,7 +3,8 @@ export class FormValidation {
         empty: 'Поле пустое. Заполните пожалуйста',
         UpperCase: 'Первый символ «Имя», «Фамилия» - это всегда большая буква.',
         url: 'Wrong Url',
-        limit: 'Превышен лимит символов в поле'
+        limit: 'Превышен лимит символов в поле',
+        wrongNumber: 'Wrong phone number'
     }
 
     static isUpperCaseNameAndSurname(string) {
