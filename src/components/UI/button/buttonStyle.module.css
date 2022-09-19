@@ -1,0 +1,51 @@
+.button {
+    width: 120px;
+    height: auto;
+    margin: 10px 20px;
+    font-size: 20px;
+    border: solid black 1px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+/* primary, danger, warning or success */
+.primary {
+    background-color: #2a03ed9f;
+}
+.danger {
+    background-color: #f133099f;
+}
+.warning {
+    background-color: #f1c3099f;
+}
+.success {
+    background-color: #0dbc1e9f;
+}
+
+.primary:hover {
+    box-shadow: 0px 0px 5px 5px #2a03ed9f;
+}
+.primary:active {
+    box-shadow: 0px 0px 3px 3px #2a03ed9f;
+}
+
+.warning:hover {
+    box-shadow: 0px 0px 5px 5px #f1c3099f;
+}
+.warning:active {
+    box-shadow: 0px 0px 3px 3px #f1c3099f;
+}
+
+.danger:hover {
+    box-shadow: 0px 0px 5px 5px #f133099f;
+}
+.danger:active {
+    box-shadow: 0px 0px 3px 3px #f133099f;
+}
+
+.success:hover {
+    box-shadow: 0px 0px 5px 5px #0dbc1e9f;
+}
+.success:active {
+    box-shadow: 0px 0px 3px 3px #0dbc1e9f;
+}
