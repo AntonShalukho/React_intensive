@@ -1,4 +1,8 @@
-.Form {
+:root {
+    --blue: rgba(0, 0, 255, 0.96)
+}
+
+.doneForm {
     width: 50vw;
     height: auto;
     margin: 50px 0px;
@@ -12,11 +16,12 @@
 }
 
 .title {
-    color: blue;
+    color: var(--blue);
 }
 
 .secondPartOfForm {
     width: 62%;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,6 +29,18 @@
     row-gap: 10px;
 }
 
-.star {
-    color: red
+.block {
+    width: 100%;
+    min-height: 40px;
+    max-height: auto;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.itemTitle {
+    color: var(--blue)
+}
+
+.textInBox {
+    word-break: break-all;
 }

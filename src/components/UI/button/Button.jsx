@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import style from './buttonStyle.module.css'
+import style from './ButtonStyle.module.css'
 
 export default class Button extends Component {
-    constructor(props){
-        super(props)
-    }
-  render() {
 
+  render() {
     return (
         <button 
             className={`${style.button} ${style[this.props.backgroundColor]}`} 
@@ -16,4 +13,5 @@ export default class Button extends Component {
         </button>
     )
   }
+  
 } 
