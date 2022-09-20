@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import style from './ButtonStyle.module.css'
 
-export default class Button extends Component {
+export default function Button({children, ...props}) {
 
-  render() {
+  
     return (
         <button 
-            className={`${style.button} ${style[this.props.backgroundColor]}`} 
-            onClick={(e) => this.props.method(e)} 
+            className={`${style.button} ${style[props.backgroundColor]}`} 
+            onClick={(e) => props.method(e)} 
         >
-            {this.props.children}    
+            {children}    
         </button>
     )
-  }
+  
   
 } 

@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './InputStyle.module.css'
 
-export default class Input extends Component {
+export default function Input({...props}) {
 
-  render() {
     return (
         <input 
-            {...this.props}
+            {...props}
             className={styles.input} 
         />
     )
-  }
 }
