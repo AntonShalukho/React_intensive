@@ -10,24 +10,22 @@ import DoneForm from '../doneForm/DoneForm';
 
 export default function Form() {
     const [context, setContest] = useState(true)
-    const [state, setState] = useState({
-      name: '',
-      surname: '',
-      bornDate: '',
-      phoneNumber: '',
-      site: '',
-      about: '',
-      technologicalStack: '',
-      projectDescription: '',
-    })
-    const [nameError, setNameError] = useState('')
-    const [surnameError, setSurnameError] = useState('')
-    const [bornDateError, setBornDateError] = useState('')
-    const [phoneNumberError, setPhoneNumberError] = useState('')
-    const [siteError, setSiteError] = useState('')
-    const [aboutError, setAboutError] = useState('')
-    const [technologicalStackError, setTechnologicalStackError] = useState('')
-    const [projectDescriptionError, setProjectDescriptionError] = useState('')
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [bornDate, setBornDate] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [site, setSite] = useState('');
+    const [about, setAbout] = useState('');
+    const [technologicalStack, setTechnologicalStack] = useState('');
+    const [projectDescription, setProjectDescription] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [surnameError, setSurnameError] = useState('');
+    const [bornDateError, setBornDateError] = useState('');
+    const [phoneNumberError, setPhoneNumberError] = useState('');
+    const [siteError, setSiteError] = useState('');
+    const [aboutError, setAboutError] = useState('');
+    const [technologicalStackError, setTechnologicalStackError] = useState('');
+    const [projectDescriptionError, setProjectDescriptionError] = useState('');
 
     let validCaunter = [];
 
@@ -40,29 +38,27 @@ export default function Form() {
   
   // SAVE AND CANSEL LOGIC
   function cansel(e) {
-    e.preventDefault()
+    e.preventDefault();
     validCaunter = [];
-    cleaner()
+    cleaner();
   }  
   function cleaner() {
-    setState({
-      name: '',
-      surname: '',
-      bornDate: '',
-      phoneNumber: '',
-      site: '',
-      about: '',
-      technologicalStack: '',
-      projectDescription: '',
-    })
-    setNameError('')
-    setSurnameError('')
-    setBornDateError('')
-    setPhoneNumberError('')
-    setSiteError('')
-    setAboutError('')
-    setTechnologicalStackError('')
-    setProjectDescriptionError('')
+    setName('');
+    setSurname('');
+    setBornDate('');
+    setPhoneNumber('');
+    setSite('');
+    setAbout('');
+    setTechnologicalStack('');
+    setProjectDescription('');
+    setNameError('');
+    setSurnameError('');
+    setBornDateError('');
+    setPhoneNumberError('');
+    setSiteError('');
+    setAboutError('');
+    setTechnologicalStackError('');
+    setProjectDescriptionError('');
   }
 
   function save(e) {
@@ -77,36 +73,35 @@ export default function Form() {
     isValidTechnologicalStack();
     isValidProjectDescription();
     if(!validCaunter.includes('0')) {
-      backToForm()
+      backToForm();
     }
   }
   function backToForm() {
-    setContest(!context)
+    setContest(!context);
   } 
   //-----------------------------------------------
 
   // VALIDATION METHODS 
   function isValidName () {
-    setNameError('')
-    setState({...state, name: FormValidation.getNameSurnameWithoutSpace(state.name)});
-    if(FormValidation.isEpmty(state.name)) {
+    setNameError('');
+    setName(FormValidation.getStringWithoutSpace(name));
+    if(FormValidation.isEpmty(name, true)) {
+      setName('')
       setNameError(FormValidation.messages.empty);
       validCaunter.push('0')
-      console.log(validCaunter)
-    } else if(FormValidation.isUpperCaseNameAndSurname(state.name)) {
+    } else if(FormValidation.isUpperCaseNameAndSurname(name)) {
       setNameError(FormValidation.messages.UpperName);
       validCaunter.push('0')
-      console.log(validCaunter)
     }
     validCaunter.push('1')
   }
   function isValidSurname () {
-    setSurnameError('')
-    setState({...state, surname: FormValidation.getNameSurnameWithoutSpace(state.surname)});
-    if(FormValidation.isEpmty(state.surname)) {
+    setSurnameError('');
+    setSurname(FormValidation.getStringWithoutSpace(surname));
+    if(FormValidation.isEpmty(surname, true)) {
       setSurnameError(FormValidation.messages.empty);
       validCaunter.push('0')
-    } else if(FormValidation.isUpperCaseNameAndSurname(state.surname)) {
+    } else if(FormValidation.isUpperCaseNameAndSurname(surname)) {
       setSurnameError(FormValidation.messages.UpperSurame);
       validCaunter.push('0')
     }
@@ -114,7 +109,7 @@ export default function Form() {
   }
   function isValidDate() {
     setBornDateError('');
-    if(FormValidation.isEpmty(state.bornDate)) {
+    if(FormValidation.isEpmty(bornDate)) {
       setBornDateError(FormValidation.messages.empty);
       validCaunter.push('0')
     }
@@ -122,13 +117,13 @@ export default function Form() {
   }
   function isValidPhone() {
     setPhoneNumberError('');
-    if(FormValidation.isEpmty(state.phoneNumber)){
+    if(FormValidation.isEpmty(phoneNumber)){
       setPhoneNumberError(FormValidation.messages.empty);
       validCaunter.push('0')
-    } else if (state.phoneNumber.length < 12) {
+    } else if (phoneNumber.length < 12) {
       setPhoneNumberError(FormValidation.messages.wrongTypePhone);
       validCaunter.push('0')
-    } else if (FormValidation.isValidPhonNumber(state.phoneNumber)) {
+    } else if (FormValidation.isValidPhonNumber(phoneNumber)) {
       setPhoneNumberError(FormValidation.messages.wrongNumber);
       validCaunter.push('0')
     } 
@@ -136,10 +131,14 @@ export default function Form() {
   }
   function isValidSite() {
     setSiteError('');
-    if(FormValidation.isEpmty(state.site)){
+    setSite(FormValidation.getStringWithoutSpace(site));
+    if(FormValidation.isEpmty(site)){
       setSiteError(FormValidation.messages.empty)
       validCaunter.push('0')
-    } else if(!FormValidation.isSite(state.site)) {
+    } else if(!FormValidation.isRightFirstPartOfSite(site)) {
+      setSiteError(FormValidation.messages.url)
+      validCaunter.push('0')
+    } else if(FormValidation.isSite(site) < 9) {
       setSiteError(FormValidation.messages.url)
       validCaunter.push('0')
     }
@@ -147,33 +146,33 @@ export default function Form() {
   }
   function isValidAbout() {
     setAboutError('');
-    if(FormValidation.isEpmty(state.about)){
+    if(FormValidation.isEpmty(about)){
       setAboutError(FormValidation.messages.empty)
       validCaunter.push('0')
     }
-    if(state.about.length > 600) {
+    if(about.length > 600) {
       validCaunter.push('0')
     }
     validCaunter.push('1')
   }
   function isValidTechnologicalStack() {
     setTechnologicalStackError('');
-    if(FormValidation.isEpmty(state.technologicalStack)){
+    if(FormValidation.isEpmty(technologicalStack)){
       setTechnologicalStackError(FormValidation.messages.empty)
       validCaunter.push('0')
     }
-    if(state.technologicalStack.length > 600) {
+    if(technologicalStack.length > 600) {
       validCaunter.push('0')
     }
     validCaunter.push('1')
   }
   function isValidProjectDescription() {
     setProjectDescriptionError('');
-    if(FormValidation.isEpmty(state.projectDescription)){
+    if(FormValidation.isEpmty(projectDescription)){
       setProjectDescriptionError(FormValidation.messages.empty)
       validCaunter.push('0')
     }
-    if(state.projectDescription.length > 600) {
+    if(projectDescription.length > 600) {
       validCaunter.push('0')
     }
     validCaunter.push('1')
@@ -197,20 +196,12 @@ export default function Form() {
 
   // PHONE NUMBER MASK
   function phoneMask() {
-    if((state.phoneNumber.length === 1)) {
-      setState({...state, phoneNumber: `${state.phoneNumber[0]}-`})
-    }
-    if((state.phoneNumber.length === 6)) {
-      setState({...state, phoneNumber: `${state.phoneNumber.slice(0, 6)}-`})
-    }
-    if((state.phoneNumber.length === 9)) {
-      setState({...state, phoneNumber: `${state.phoneNumber.slice(0, 9)}-`})
-    }
+    if((phoneNumber.length === 1)) {setPhoneNumber(`${phoneNumber[0]}-`)}
+    if((phoneNumber.length === 6)) {setPhoneNumber(`${phoneNumber.slice(0, 6)}-`)}
+    if((phoneNumber.length === 9)) {setPhoneNumber(`${phoneNumber.slice(0, 9)}-`)}
   }
   function isBackspace(e) {
-    if(e.key !== 'Backspace') {
-      phoneMask()
-    }
+    if(e.key !== 'Backspace') { phoneMask() }
   }
   //-------------------------------------------------------
 
@@ -226,8 +217,8 @@ export default function Form() {
                     type='text' 
                     name='name'
                     placeholder='Name' 
-                    value={state.name}
-                    onChange={(e) => {setState({...state, name: e.target.value}); setNameError('')}} 
+                    value={name}
+                    onChange={(e) => {setName(e.target.value); setNameError('')}} 
                   />
                   <ErrorLine>{nameError}</ErrorLine>
                 </div>
@@ -237,8 +228,8 @@ export default function Form() {
                     type='text' 
                     name='surname' 
                     placeholder='Surname'
-                    value={state.surname}
-                    onChange={(e) => {setState({...state, surname: e.target.value}); setSurnameError('')}} 
+                    value={surname}
+                    onChange={(e) => {setSurname(e.target.value); setSurnameError('')}} 
                   />
                   <ErrorLine>{surnameError}</ErrorLine>
                 </div>
@@ -248,8 +239,8 @@ export default function Form() {
                     type='date'
                     name='bornDate'
                     placeholder='Born date' 
-                    value={state.bornDate}
-                    onChange={(e) => {setState({...state, bornDate: e.target.value}); setBornDateError('')}} 
+                    value={bornDate}
+                    onChange={(e) => {setBornDate(e.target.value); setBornDateError('')}} 
                   />
                   <ErrorLine>{bornDateError}</ErrorLine>
                 </div>
@@ -260,8 +251,8 @@ export default function Form() {
                     name='phoneNumber' 
                     placeholder='7-7777-77-77'
                     maxLength="12"
-                    value={state.phoneNumber}
-                    onChange={(e) => {setState({...state, phoneNumber: e.target.value}); setPhoneNumberError('')}} 
+                    value={phoneNumber}
+                    onChange={(e) => {setPhoneNumber(e.target.value); setPhoneNumberError('')}} 
                   />
                   <ErrorLine>{phoneNumberError}</ErrorLine>
                 </div>
@@ -274,8 +265,8 @@ export default function Form() {
                     type='text' 
                     name='site' 
                     placeholder='https://'
-                    value={state.site}
-                    onChange={(e) => {setState({...state, site: e.target.value}); setSiteError('')}}  
+                    value={site}
+                    onChange={(e) => {setSite(e.target.value); setSiteError('')}}  
                   />
                   <ErrorLine>{siteError}</ErrorLine>
                 </div>
@@ -283,13 +274,13 @@ export default function Form() {
                   <Label>О себе*</Label>
                   <Textarea 
                     placeholder='About you'
-                    value={state.about} 
-                    onChange={(e) => {setState({...state, about: e.target.value}); setAboutError('')}}
+                    value={about} 
+                    onChange={(e) => {setAbout(e.target.value); setAboutError('')}}
                   ></Textarea>
                   <ErrorLine>
                     {aboutError 
                       ? FormValidation.messages.empty 
-                      : message(state.about, 'about')
+                      : message(about, 'about')
                     }
                   </ErrorLine>
                 </div>
@@ -297,13 +288,13 @@ export default function Form() {
                   <Label>Стек технологий*</Label>
                   <Textarea 
                     placeholder='Technological stack'
-                    value={state.technologicalStack}
-                    onChange={(e) => {setState({...state, technologicalStack: e.target.value}); setTechnologicalStackError('')}}
+                    value={technologicalStack}
+                    onChange={(e) => {setTechnologicalStack(e.target.value); setTechnologicalStackError('')}}
                   ></Textarea>
                   <ErrorLine>
                     {technologicalStackError 
                       ? FormValidation.messages.empty 
-                      : message(state.technologicalStack, 'stack')
+                      : message(technologicalStack, 'stack')
                     }
                   </ErrorLine>
                 </div>    
@@ -311,13 +302,13 @@ export default function Form() {
                   <Label>Описание последнего проекта*</Label>
                   <Textarea 
                     placeholder='Clarifiting last project'
-                    value={state.projectDescription}
-                    onChange={(e) => {setState({...state, projectDescription: e.target.value}); setProjectDescriptionError('')}}
+                    value={projectDescription}
+                    onChange={(e) => {setProjectDescription(e.target.value); setProjectDescriptionError('')}}
                   ></Textarea>
                   <ErrorLine>
                     {projectDescriptionError 
                       ? FormValidation.messages.empty 
-                      : message(state.projectDescription, 'discription')
+                      : message(projectDescription, 'discription')
                     }
                   </ErrorLine>
                 </div>      
@@ -328,7 +319,7 @@ export default function Form() {
                 <Button method={save} backgroundColor={'success'} >Сохранить</Button>
               </div>
             </form>)
-          : <DoneForm state={{...state}} methodBack={backToForm} cleaner={cleaner} />
+          : <DoneForm state={[name, surname, bornDate, phoneNumber, site, about, technologicalStack, projectDescription]} methodBack={backToForm} cleaner={cleaner} />
         }
       </>
     )
