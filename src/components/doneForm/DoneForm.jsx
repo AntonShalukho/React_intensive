@@ -8,6 +8,7 @@ export default function DoneForm({...props}) {
         props.cleaner()
     }
     const titles = ['Born date:', 'Phone number:', 'Site:', 'About you:', 'Technology stack:', 'Projects description:']
+    const [name, surname] = props.state
 
     function BlockDoneForm({...props}) {
         return (
@@ -20,7 +21,7 @@ export default function DoneForm({...props}) {
 
     return (
         <div className={style.doneForm}>
-            <div className={style.title} >{`${props.state[0]} ${props.state[1]}`}</div>
+            <div className={style.title} >{`${name} ${surname}`}</div>
             <div className={style.secondPartOfForm}>
                 {props.state.slice(2).map((el, index) => <BlockDoneForm key={titles[index]} state={el} title={titles[index]} />)}
             </div>
