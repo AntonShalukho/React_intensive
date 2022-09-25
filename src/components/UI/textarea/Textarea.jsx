@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './TextareaStyle.module.css'
 
-export default class Textarea extends Component {
+export default function Textarea({...props}) {
   
-  render() {
     return (
       <textarea 
-        {...this.props} 
+        {...props} 
         className={style.textarea}  
         cols="50" rows="7"
       ></textarea>
     )
-  }
 }

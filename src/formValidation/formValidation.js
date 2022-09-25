@@ -9,22 +9,32 @@ export class FormValidation {
         wrongTypePhone: 'Wrong phone number type'
     }
 
-    static getNameSurnameWithoutSpace(string) {
+    static getStringWithoutSpace(string) {
         let acc = string.split(' ').join('')
         return acc
     }
 
     static isUpperCaseNameAndSurname(string) {
-        return string[0] === string[0].toUpperCase() ? false : true
+        let acc = FormValidation.getStringWithoutSpace(string)
+        return acc[0] === acc[0].toUpperCase() ? false : true
     }
 
-    static isEpmty(string) {
+    static isEpmty(string, isNameSurname = false) {
+        let acc;
+        if(isNameSurname){
+            acc = FormValidation.getStringWithoutSpace(string)
+            return acc.length === 0 ? true : false
+        }
         return string.length === 0 ? true : false
     }
 
-    static isSite(string) {
+    static isRightFirstPartOfSite(string) {
         const reg = /https:\/\//
         return reg.test(string.split().slice(0, 9).join(''))
+    }
+    static isSite(string) {
+        let acc = FormValidation.getStringWithoutSpace(string.slice(8))
+        return acc
     }
     static isValidPhonNumber(string) {
         if(+string.substring(0, 1) || string.substring(0, 1) === '0') {

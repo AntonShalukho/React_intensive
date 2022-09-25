@@ -1,11 +1,11 @@
-import { Component } from "react";
+import React from "react";
 import style from './ErrorLine.module.css'
 
-export default class ErrorLine extends Component {
+export default function ErrorLine({children}) {
 
-    render() {
         return (
-            <div className={style.error} >{this.props.children}</div>
+            <div className={style.error} >
+                {children}
+            </div>
         )
-    }
 }
